@@ -3,16 +3,16 @@
 // ================================
 
 /** Danh sách vai trò của người dùng trong hệ thống */
-export type UserRole = "guest" | "driver" | "manager" | "admin"
+export type UserRole = "guest" | "driver" | "manager" | "admin";
 
 /** Thông tin người dùng */
 export interface User {
-  id: string
-  name: string
-  role: UserRole
-  phone: string
-  email?: string
-  createdAt: string
+  id: string;
+  name: string;
+  role: UserRole;
+  phone: string;
+  email?: string;
+  createdAt: string;
 }
 
 // ================================
@@ -20,40 +20,40 @@ export interface User {
 // ================================
 
 /** Loại phương tiện được hỗ trợ */
-export type VehicleType = "motorbike" | "car" | "truck" | "van" 
+export type VehicleType = "motorbike" | "car" | "truck" | "van" | "scooter";
 
 /** Lịch bảo dưỡng của xe */
 export interface MaintenanceSchedule {
-  oilChange?: MaintenanceItem
-  coolant?: MaintenanceItem
-  brakes?: MaintenanceItem
-  tires?: MaintenanceItem
+  oilChange?: MaintenanceItem;
+  coolant?: MaintenanceItem;
+  brakes?: MaintenanceItem;
+  tires?: MaintenanceItem;
 }
 
 /** Mục bảo dưỡng riêng lẻ (nhớ quãng đường & ngày gần nhất) */
 export interface MaintenanceItem {
-  intervalKm: number
-  lastServiceKm: number
-  lastServiceDate: string
+  intervalKm: number;
+  lastServiceKm: number;
+  lastServiceDate: string;
 }
 
 /** Thông tin phương tiện */
 export interface Vehicle {
-  id: string
-  ownerId: string
-  brand: string
-  make: string
-  model: string
-  year: number
-  vehicleType: VehicleType
-  licensePlate?: string
-  color?: string
-  photo?: string
-  engineSize?: string
-  mileage?: number
-  maintenanceSchedule: MaintenanceSchedule
-  createdAt: string
-  updatedAt: string
+  id: string;
+  ownerId: string;
+  brand: string;
+  make: string;
+  model: string;
+  year: number;
+  vehicleType: VehicleType;
+  licensePlate?: string;
+  color?: string;
+  photo?: string;
+  engineSize?: string;
+  mileage?: number;
+  maintenanceSchedule: MaintenanceSchedule;
+  createdAt: string;
+  updatedAt: string;
 }
 
 // ================================
@@ -61,31 +61,31 @@ export interface Vehicle {
 // ================================
 
 /** Loại chuyến đi hoặc chi phí phát sinh */
-export type TripType = "maintenance" | "fuel" | "repair" | "other"
+export type TripType = "maintenance" | "fuel" | "repair" | "other";
 
 /** Dữ liệu chi tiết hóa đơn được OCR trích xuất */
 export interface OCRData {
-  vendor?: string
-  date?: string
+  vendor?: string;
+  date?: string;
   items?: Array<{
-    name: string
-    quantity: number
-    price: number
-  }>
-  total?: number
+    name: string;
+    quantity: number;
+    price: number;
+  }>;
+  total?: number;
 }
 
 /** Ghi nhận 1 chuyến đi hoặc chi phí */
 export interface Trip {
-  id: string
-  vehicleId: string
-  driverId: string
-  type: TripType
-  amount: number
-  description?: string
-  receiptUrl?: string
-  ocrParsed?: OCRData
-  createdAt: string
+  id: string;
+  vehicleId: string;
+  driverId: string;
+  type: TripType;
+  amount: number;
+  description?: string;
+  receiptUrl?: string;
+  ocrParsed?: OCRData;
+  createdAt: string;
 }
 
 // ================================
@@ -93,26 +93,21 @@ export interface Trip {
 // ================================
 
 /** Loại nhắc nhở */
-export type ReminderType = "oil" | "coolant" | "brakes" | "tires" | "inspection"
+export type ReminderType = "oil" | "coolant" | "brakes" | "tires" | "inspection";
 
 /** Trạng thái nhắc nhở */
-export type ReminderStatus =
-  | "pending"
-  | "sent"
-  | "acknowledged"
-  | "completed"
-  | "dismissed"
+export type ReminderStatus = "pending" | "sent" | "acknowledged" | "completed" | "dismissed";
 
 /** Thông tin nhắc nhở bảo dưỡng */
 export interface Reminder {
-  id: string
-  vehicleId: string
-  type: ReminderType
-  dueDate: string
-  status: ReminderStatus
-  message: string
-  sentAt?: string
-  acknowledgedAt?: string
+  id: string;
+  vehicleId: string;
+  type: ReminderType;
+  dueDate: string;
+  status: ReminderStatus;
+  message: string;
+  sentAt?: string;
+  acknowledgedAt?: string;
 }
 
 // ================================
@@ -121,16 +116,16 @@ export interface Reminder {
 
 /** Thông tin file xuất báo cáo */
 export interface Export {
-  id: string
-  managerId: string
-  fileUrl: string
+  id: string;
+  managerId: string;
+  fileUrl: string;
   params: {
-    startDate?: string
-    endDate?: string
-    vehicleIds?: string[]
-    type?: string
-  }
-  createdAt: string
+    startDate?: string;
+    endDate?: string;
+    vehicleIds?: string[];
+    type?: string;
+  };
+  createdAt: string;
 }
 
 // ================================
@@ -139,15 +134,15 @@ export interface Export {
 
 /** Gợi ý dầu nhớt phù hợp cho xe */
 export interface LubricantRecommendation {
-  id: string
-  vehicleId: string
-  productName: string
-  productType: string
-  viscosity: string
-  brand: string
-  price: number
-  reason: string
-  createdAt: string
+  id: string;
+  vehicleId: string;
+  productName: string;
+  productType: string;
+  viscosity: string;
+  brand: string;
+  price: number;
+  reason: string;
+  createdAt: string;
 }
 
 // ================================
@@ -155,18 +150,18 @@ export interface LubricantRecommendation {
 // ================================
 
 export interface VehicleModel {
-  id: string
-  name: string
-  photo: string
-  year: number
-  type: VehicleType
+  id: string;
+  name: string;
+  photo: string;
+  year: number;
+  type: VehicleType;
 }
 
 /** Hãng xe và danh sách model */
 export interface VehicleBrand {
-  id: string
-  name: string
-  logo: string
-  vehicleTypes: VehicleType[]
-  models: VehicleModel[]
+  id: string;
+  name: string;
+  logo: string;
+  vehicleTypes: VehicleType[];
+  models: VehicleModel[];
 }

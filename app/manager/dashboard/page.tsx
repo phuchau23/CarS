@@ -8,20 +8,9 @@ import { Reminder, Trip, User, Vehicle } from "@/app/lib/types";
 import { getDatabase } from "@/app/lib/db";
 import { Button } from "@/app/components/ui/button";
 import { FleetStats } from "@/app/components/dashboard/fleet-stats";
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/app/components/ui/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/app/components/ui/tabs";
 import { MaintenanceOverview } from "@/app/components/dashboard/maintenance-overview";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/app/components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/app/components/ui/card";
 import { VehicleTable } from "@/app/components/dashboard/vehicle-table";
 import { DriverAssignment } from "@/app/components/dashboard/driver-assignment";
 
@@ -62,9 +51,7 @@ export default function ManagerDashboardPage() {
                   <LayoutDashboard className="h-6 w-6 text-primary" />
                   Quản lý đội xe
                 </h1>
-                <p className="text-sm text-muted-foreground">
-                  Tổng quan và quản lý toàn bộ đội xe
-                </p>
+                <p className="text-sm text-muted-foreground">Tổng quan và quản lý toàn bộ đội xe</p>
               </div>
             </div>
             <Button asChild variant="outline" size="sm">
@@ -96,44 +83,26 @@ export default function ManagerDashboardPage() {
             <Card>
               <CardHeader>
                 <CardTitle>Hoạt động gần đây</CardTitle>
-                <CardDescription>
-                  Chi phí và bảo dưỡng trong 30 ngày qua
-                </CardDescription>
+                <CardDescription>Chi phí và bảo dưỡng trong 30 ngày qua</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
                   {trips
                     .slice(0, 5)
-                    .sort(
-                      (a, b) =>
-                        new Date(b.createdAt).getTime() -
-                        new Date(a.createdAt).getTime()
-                    )
+                    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
                     .map((trip) => {
-                      const vehicle = vehicles.find(
-                        (v) => v.id === trip.vehicleId
-                      );
+                      const vehicle = vehicles.find((v) => v.id === trip.vehicleId);
                       return (
-                        <div
-                          key={trip.id}
-                          className="flex items-center justify-between p-3 bg-secondary/50 rounded-lg"
-                        >
+                        <div key={trip.id} className="flex items-center justify-between p-3 bg-secondary/50 rounded-lg">
                           <div>
-                            <p className="font-medium text-sm">
-                              {trip.description || trip.type}
-                            </p>
+                            <p className="font-medium text-sm">{trip.description || trip.type}</p>
                             {vehicle && (
                               <p className="text-xs text-muted-foreground">
-                                {vehicle.make} {vehicle.model} •{" "}
-                                {new Date(trip.createdAt).toLocaleDateString(
-                                  "vi-VN"
-                                )}
+                                {vehicle.make} {vehicle.model} • {new Date(trip.createdAt).toLocaleDateString("vi-VN")}
                               </p>
                             )}
                           </div>
-                          <p className="font-semibold text-accent">
-                            {trip.amount.toLocaleString()}đ
-                          </p>
+                          <p className="font-semibold text-accent">{trip.amount.toLocaleString()}đ</p>
                         </div>
                       );
                     })}
@@ -148,15 +117,9 @@ export default function ManagerDashboardPage() {
                 <div className="flex items-center justify-between">
                   <div>
                     <CardTitle>Danh sách xe</CardTitle>
-                    <CardDescription>
-                      {vehicles.length} xe trong đội
-                    </CardDescription>
+                    <CardDescription>{vehicles.length} xe trong đội</CardDescription>
                   </div>
-                  <Button
-                    asChild
-                    size="sm"
-                    className="bg-accent hover:bg-accent/90"
-                  >
+                  <Button asChild size="sm" className="bg-primary hover:bg-primary/90">
                     <Link href="/vehicle/add">Thêm xe mới</Link>
                   </Button>
                 </div>
@@ -168,11 +131,7 @@ export default function ManagerDashboardPage() {
           </TabsContent>
 
           <TabsContent value="drivers">
-            <DriverAssignment
-              vehicles={vehicles}
-              drivers={drivers}
-              onUpdate={loadData}
-            />
+            <DriverAssignment vehicles={vehicles} drivers={drivers} onUpdate={loadData} />
           </TabsContent>
 
           <TabsContent value="maintenance">
@@ -181,9 +140,7 @@ export default function ManagerDashboardPage() {
             <Card>
               <CardHeader>
                 <CardTitle>Lịch sử bảo dưỡng</CardTitle>
-                <CardDescription>
-                  Tất cả các lần bảo dưỡng đã thực hiện
-                </CardDescription>
+                <CardDescription>Tất cả các lần bảo dưỡng đã thực hiện</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-3">
@@ -191,30 +148,18 @@ export default function ManagerDashboardPage() {
                     .filter((t) => t.type === "maintenance")
                     .slice(0, 10)
                     .map((trip) => {
-                      const vehicle = vehicles.find(
-                        (v) => v.id === trip.vehicleId
-                      );
+                      const vehicle = vehicles.find((v) => v.id === trip.vehicleId);
                       return (
-                        <div
-                          key={trip.id}
-                          className="flex items-center justify-between p-3 bg-secondary/50 rounded-lg"
-                        >
+                        <div key={trip.id} className="flex items-center justify-between p-3 bg-secondary/50 rounded-lg">
                           <div>
-                            <p className="font-medium text-sm">
-                              {trip.description || "Bảo dưỡng"}
-                            </p>
+                            <p className="font-medium text-sm">{trip.description || "Bảo dưỡng"}</p>
                             {vehicle && (
                               <p className="text-xs text-muted-foreground">
-                                {vehicle.make} {vehicle.model} •{" "}
-                                {new Date(trip.createdAt).toLocaleDateString(
-                                  "vi-VN"
-                                )}
+                                {vehicle.make} {vehicle.model} • {new Date(trip.createdAt).toLocaleDateString("vi-VN")}
                               </p>
                             )}
                           </div>
-                          <p className="font-semibold text-accent">
-                            {trip.amount.toLocaleString()}đ
-                          </p>
+                          <p className="font-semibold text-accent">{trip.amount.toLocaleString()}đ</p>
                         </div>
                       );
                     })}

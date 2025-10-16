@@ -1,22 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "../ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import { Users, Check } from "lucide-react";
 import { User, Vehicle } from "@/app/lib/types";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 import { Button } from "../ui/button";
 import { getDatabase } from "@/app/lib/db";
 import { Badge } from "../ui/badge";
@@ -27,11 +15,7 @@ interface DriverAssignmentProps {
   onUpdate?: () => void;
 }
 
-export function DriverAssignment({
-  vehicles,
-  drivers,
-  onUpdate,
-}: DriverAssignmentProps) {
+export function DriverAssignment({ vehicles, drivers, onUpdate }: DriverAssignmentProps) {
   const [selectedVehicle, setSelectedVehicle] = useState<string>("");
   const [selectedDriver, setSelectedDriver] = useState<string>("");
   const [isAssigning, setIsAssigning] = useState(false);
@@ -82,9 +66,9 @@ export function DriverAssignment({
               <SelectTrigger>
                 <SelectValue placeholder="Chọn xe cần gán" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="bg-black text-white border border-gray-700">
                 {vehicles.map((vehicle) => (
-                  <SelectItem key={vehicle.id} value={vehicle.id}>
+                  <SelectItem key={vehicle.id} value={vehicle.id} className="hover:bg-gray-800 focus:bg-gray-800">
                     {vehicle.make} {vehicle.model} - {vehicle.licensePlate}
                   </SelectItem>
                 ))}
@@ -98,9 +82,9 @@ export function DriverAssignment({
               <SelectTrigger>
                 <SelectValue placeholder="Chọn tài xế" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="bg-black text-white border border-gray-700">
                 {drivers.map((driver) => (
-                  <SelectItem key={driver.id} value={driver.id}>
+                  <SelectItem key={driver.id} value={driver.id} className="hover:bg-gray-800 focus:bg-gray-800">
                     {driver.name} ({getDriverVehicleCount(driver.id)} xe)
                   </SelectItem>
                 ))}
@@ -129,30 +113,22 @@ export function DriverAssignment({
           <div className="space-y-3">
             {drivers.map((driver) => {
               const vehicleCount = getDriverVehicleCount(driver.id);
-              const driverVehicles = vehicles.filter(
-                (v) => v.ownerId === driver.id
-              );
+              const driverVehicles = vehicles.filter((v) => v.ownerId === driver.id);
 
               return (
                 <div key={driver.id} className="p-3 bg-secondary/50 rounded-lg">
                   <div className="flex items-center justify-between mb-2">
                     <div>
                       <p className="font-medium">{driver.name}</p>
-                      <p className="text-xs text-muted-foreground">
-                        {driver.phone}
-                      </p>
+                      <p className="text-xs text-muted-foreground">{driver.phone}</p>
                     </div>
                     <Badge variant="secondary">{vehicleCount} xe</Badge>
                   </div>
                   {driverVehicles.length > 0 && (
                     <div className="mt-2 pt-2 border-t space-y-1">
                       {driverVehicles.map((vehicle) => (
-                        <p
-                          key={vehicle.id}
-                          className="text-xs text-muted-foreground"
-                        >
-                          • {vehicle.make} {vehicle.model} (
-                          {vehicle.licensePlate})
+                        <p key={vehicle.id} className="text-xs text-muted-foreground">
+                          • {vehicle.make} {vehicle.model} ({vehicle.licensePlate})
                         </p>
                       ))}
                     </div>

@@ -6,12 +6,7 @@ import { getDatabase } from "@/app/lib/db";
 import { useApp } from "@/app/components/providers/app-provider";
 import { Button } from "@/app/components/ui/button";
 import { Card, CardContent } from "@/app/components/ui/card";
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/app/components/ui/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/app/components/ui/tabs";
 import { TripCard } from "@/app/components/trip/trip-card";
 import { ArrowLeft, Plus, Receipt } from "lucide-react";
 import Link from "next/link";
@@ -33,15 +28,8 @@ export default function TripsPage() {
     setVehicles(userVehicles);
 
     const vehicleIds = userVehicles.map((v) => v.id);
-    const allTrips = db
-      .getTrips()
-      .filter((t) => vehicleIds.includes(t.vehicleId));
-    setTrips(
-      allTrips.sort(
-        (a, b) =>
-          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-      )
-    );
+    const allTrips = db.getTrips().filter((t) => vehicleIds.includes(t.vehicleId));
+    setTrips(allTrips.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()));
   };
 
   useEffect(() => {
@@ -56,8 +44,7 @@ export default function TripsPage() {
     }
   };
 
-  const getVehicleById = (vehicleId: string) =>
-    vehicles.find((v) => v.id === vehicleId);
+  const getVehicleById = (vehicleId: string) => vehicles.find((v) => v.id === vehicleId);
 
   const maintenanceTrips = trips.filter((t) => t.type === "maintenance");
   const fuelTrips = trips.filter((t) => t.type === "fuel");
@@ -82,12 +69,10 @@ export default function TripsPage() {
               </Button>
               <div>
                 <h1 className="text-2xl font-bold">Chi phí</h1>
-                <p className="text-sm text-muted-foreground">
-                  {trips.length} giao dịch
-                </p>
+                <p className="text-sm text-muted-foreground">{trips.length} giao dịch</p>
               </div>
             </div>
-            <Button asChild size="sm" className="bg-accent hover:bg-accent/90">
+            <Button asChild size="sm" className="bg-primary hover:bg-primary/90">
               <Link href="/trip/new">
                 <Plus className="h-4 w-4 mr-2" />
                 Thêm mới
@@ -102,9 +87,7 @@ export default function TripsPage() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
           <Card>
             <CardContent className="p-4 text-center">
-              <p className="text-2xl font-bold text-accent">
-                {totalSpent.toLocaleString()}đ
-              </p>
+              <p className="text-2xl font-bold text-accent">{totalSpent.toLocaleString()}đ</p>
               <p className="text-xs text-muted-foreground">Tổng chi</p>
             </CardContent>
           </Card>
@@ -116,17 +99,13 @@ export default function TripsPage() {
           </Card>
           <Card>
             <CardContent className="p-4 text-center">
-              <p className="text-2xl font-bold text-success">
-                {avgPerTrip.toLocaleString()}đ
-              </p>
+              <p className="text-2xl font-bold text-success">{avgPerTrip.toLocaleString()}đ</p>
               <p className="text-xs text-muted-foreground">TB/giao dịch</p>
             </CardContent>
           </Card>
           <Card>
             <CardContent className="p-4 text-center">
-              <p className="text-2xl font-bold text-warning">
-                {trips.filter((t) => t.receiptUrl).length}
-              </p>
+              <p className="text-2xl font-bold text-warning">{trips.filter((t) => t.receiptUrl).length}</p>
               <p className="text-xs text-muted-foreground">Có hóa đơn</p>
             </CardContent>
           </Card>
@@ -147,9 +126,7 @@ export default function TripsPage() {
               <Card>
                 <CardContent className="py-12 text-center">
                   <Receipt className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-                  <p className="text-muted-foreground mb-4">
-                    Chưa có chi phí nào
-                  </p>
+                  <p className="text-muted-foreground mb-4">Chưa có chi phí nào</p>
                   <Button asChild className="bg-primary hover:bg-primary/90">
                     <Link href="/trip/new">
                       <Plus className="h-4 w-4 mr-2" />
@@ -175,9 +152,7 @@ export default function TripsPage() {
             {maintenanceTrips.length === 0 ? (
               <Card>
                 <CardContent className="py-12 text-center">
-                  <p className="text-muted-foreground">
-                    Chưa có chi phí bảo dưỡng
-                  </p>
+                  <p className="text-muted-foreground">Chưa có chi phí bảo dưỡng</p>
                 </CardContent>
               </Card>
             ) : (
@@ -197,9 +172,7 @@ export default function TripsPage() {
             {fuelTrips.length === 0 ? (
               <Card>
                 <CardContent className="py-12 text-center">
-                  <p className="text-muted-foreground">
-                    Chưa có chi phí nhiên liệu
-                  </p>
+                  <p className="text-muted-foreground">Chưa có chi phí nhiên liệu</p>
                 </CardContent>
               </Card>
             ) : (
@@ -219,9 +192,7 @@ export default function TripsPage() {
             {repairTrips.length === 0 ? (
               <Card>
                 <CardContent className="py-12 text-center">
-                  <p className="text-muted-foreground">
-                    Chưa có chi phí sửa chữa
-                  </p>
+                  <p className="text-muted-foreground">Chưa có chi phí sửa chữa</p>
                 </CardContent>
               </Card>
             ) : (

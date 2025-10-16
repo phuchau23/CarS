@@ -130,9 +130,7 @@ export default function AddVehiclePage() {
                 </div>
                 {s < 4 && (
                   <div
-                    className={`w-12 h-1 mx-1 rounded-full transition-all ${
-                      s < step ? "bg-primary" : "bg-secondary"
-                    }`}
+                    className={`w-12 h-1 mx-1 rounded-full transition-all ${s < step ? "bg-primary" : "bg-secondary"}`}
                   />
                 )}
               </div>
@@ -157,40 +155,21 @@ export default function AddVehiclePage() {
         {/* Step Content */}
         <Card className="border-border/50 shadow-xl">
           <CardContent className="p-6 md:p-8">
-            {step === 1 && (
-              <VehicleTypeSelector
-                selected={vehicleType}
-                onSelect={handleTypeSelect}
-              />
-            )}
+            {step === 1 && <VehicleTypeSelector selected={vehicleType} onSelect={handleTypeSelect} />}
 
             {step === 2 && (
               <div className="space-y-4">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setStep(1)}
-                  className="mb-4"
-                >
+                <Button size="sm" onClick={() => setStep(1)} className="mb-4 bg-primary hover:bg-primary/90 text-white">
                   <ArrowLeft className="h-4 w-4 mr-2" />
                   Đổi loại xe
                 </Button>
-                <BrandSelector
-                  vehicleType={vehicleType}
-                  selected={brandId}
-                  onSelect={handleBrandSelect}
-                />
+                <BrandSelector vehicleType={vehicleType} selected={brandId} onSelect={handleBrandSelect} />
               </div>
             )}
 
             {step === 3 && (
               <div className="space-y-4">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setStep(2)}
-                  className="mb-4"
-                >
+                <Button size="sm" onClick={() => setStep(2)} className="mb-4 bg-primary hover:bg-primary/90 text-white">
                   <ArrowLeft className="h-4 w-4 mr-2" />
                   Đổi hãng xe
                 </Button>
@@ -205,12 +184,7 @@ export default function AddVehiclePage() {
 
             {step === 4 && (
               <div className="space-y-4">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setStep(3)}
-                  className="mb-4"
-                >
+                <Button size="sm" onClick={() => setStep(3)} className="mb-4 bg-primary hover:bg-primary/90 text-white">
                   <ArrowLeft className="h-4 w-4 mr-2" />
                   Đổi mẫu xe
                 </Button>
