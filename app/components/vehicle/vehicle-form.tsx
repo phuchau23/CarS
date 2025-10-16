@@ -34,7 +34,7 @@ export interface VehicleFormData {
   model: string;
   year: number;
   licensePlate: string;
-  vehicleType: "motorbike" | "car" | "truck" | "van";
+  vehicleType: VehicleType;
   mileage: number;
   maintenanceSchedule: MaintenanceSchedule;
 }
@@ -45,7 +45,7 @@ export function VehicleForm({ vehicle, onSubmit, onCancel }: VehicleFormProps) {
     model: vehicle?.model || "",
     year: vehicle?.year || new Date().getFullYear(),
     licensePlate: vehicle?.licensePlate || "",
-    vehicleType: vehicle?.vehicleType || "motorbike",
+    vehicleType: vehicle?.vehicleType || ("motorbike" as VehicleType),
     mileage: vehicle?.mileage || 0,
     maintenanceSchedule: vehicle?.maintenanceSchedule || {
       oilChange: {
